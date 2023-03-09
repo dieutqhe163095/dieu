@@ -1,0 +1,73 @@
+.back-button {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px ;
+  
+}
+body {
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+th,
+td {
+
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr {
+    border-bottom: 1px solid gray;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+tr:first-child,
+tr:nth-child(2) {
+    background-color: rgb(255, 191, 81);
+}
+
+.attended {
+    color: green;
+}
+
+.notyet,
+.absent {
+    color: red;
+}
+
+td {
+    width: auto;
+}
+
+td:first-child {
+    width: 15%;
+}
+
+
+form.lecture-search input[type=text] {
+    padding: 10px;
+    border: 1px solid grey;
+    width: 20%;
+    background: #f1f1f1;
+}
+
+form.lecture-search button {
+    width: 75px;
+    font-size: 15px;
+    padding: 10px;
+    background: #2196F3;
+    color: white;
+    border: 1px solid grey;
+    border-left: none;
+    cursor: pointer;
+  }
+a{
+    text-decoration:none;
+}

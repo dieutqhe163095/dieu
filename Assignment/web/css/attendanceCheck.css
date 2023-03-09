@@ -1,0 +1,81 @@
+.studentImg {
+    height: 150px;
+    width: 100px;
+    display: block;
+    margin: 0 auto;
+}
+
+.info-banner {
+    width: 79%;
+    height: 10%;
+    border-collapse: collapse;
+    background-color: #f1f1f1;
+    margin: 0 auto;
+    padding: 1px 1px 1px 1px;
+    margin-bottom: 5px;
+    padding-left: 1%;
+    white-space: nowrap;
+    font-size: large;
+}
+
+body {
+
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+th,
+td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+tr {
+    border-bottom: 1px solid gray;
+}
+
+table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+thead {
+    background-color: rgb(255, 191, 81);
+}
+
+td:first-child,th:first-child {
+    width: 5%;
+}
+
+td:nth-child(2),th:nth-child(2) {
+    width: 7%;
+}
+
+
+td:nth-child(3) {
+    width: 7%;
+
+}
+
+td:nth-child(4) {
+    width: 20%;
+
+}
+
+
+td:nth-child(even) {
+    background-color: rgb(248, 248, 248);
+}
+
+a {
+    text-decoration: none;
+}
+.attened{
+    color: green;
+}
+.absent{
+    color: red;
+}
+.notyet{
+    color: red;
+}
