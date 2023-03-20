@@ -108,7 +108,7 @@ public class attendanceController extends BaseRequiredAuthenticationController {
             request.setAttribute("timetable", timetable);
             ArrayList<Attendance> attendances = attendanceDBContext.list(timetableCode);
             request.setAttribute("attendanceList", attendances);
-            request.getRequestDispatcher("web/attendance.jsp").forward(request, response);
+            request.getRequestDispatcher("attendance.jsp").forward(request, response);
         }
 
     }

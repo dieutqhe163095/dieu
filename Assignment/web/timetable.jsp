@@ -14,7 +14,8 @@
     </head>
 
     <body>
-        <a href="javascript:history.back()" class="back-button"><- Back</a>
+     
+        <a href="index.jsp" class="back-button">Logout</a>
 
         <div>
             <Table>
@@ -65,9 +66,11 @@
                         </td>
                     </c:forEach>
                 </tr>
+                
                 <c:forEach items="${requestScope.slotList}" var="slot">
                     <tr>
                         <td>Slot ${slot.slot}</td>
+                        
                         <c:forEach items="${requestScope.dayList}" var="d">                          
                             <td>                              
                                 <c:forEach items="${requestScope.timetableList}" var="tb">

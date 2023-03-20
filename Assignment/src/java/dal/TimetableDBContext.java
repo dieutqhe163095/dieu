@@ -78,7 +78,7 @@ public class TimetableDBContext extends DBContext<Timetable> {
             String sql = "SELECT [Slot]\n"
                     + "      ,[From]\n"
                     + "      ,[To]\n"
-                    + "  FROM [Assigment].[dbo].[Slot]";
+                    + "  FROM [Assignment1].[dbo].[Slot]";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

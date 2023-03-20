@@ -13,7 +13,7 @@
     </head>
 
     <body>
-         <a href="javascript:history.back()" class="back-button"><- Back</a>
+         <a href="javascript:history.back()" class="back-button">Back</a>
         <div class="banner">
             <h1>Single Activity Attendance</h1>
         </div>
