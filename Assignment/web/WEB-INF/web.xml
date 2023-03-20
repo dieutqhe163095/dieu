@@ -9,7 +9,6 @@
         <url-pattern>/ttimetable.jsp</url-pattern>
         <url-pattern>/attendance.jsp</url-pattern>
         <url-pattern>/attendanceCheck.jsp</url-pattern>
-
     </filter-mapping>
     <servlet>
         <servlet-name>groupController</servlet-name>
@@ -31,6 +30,10 @@
         <servlet-name>AttendanceCheckController</servlet-name>
         <servlet-class>controller.AttendanceCheckController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AttendancePercentController</servlet-name>
+        <servlet-class>controller.AttendancePercentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>groupController</servlet-name>
         <url-pattern>/Group</url-pattern>
@@ -50,6 +53,10 @@
     <servlet-mapping>
         <servlet-name>AttendanceCheckController</servlet-name>
         <url-pattern>/AttendanceCheck</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AttendancePercentController</servlet-name>
+        <url-pattern>/attendancePercent</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
