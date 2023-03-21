@@ -24,7 +24,7 @@ public class AttendancePercentDBContext extends DBContext<Term>{
         ArrayList<Term> terms = new ArrayList<>();
         try {
             String time;
-            String sql = "select TermName from Term";
+            String sql = "select * from Term";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

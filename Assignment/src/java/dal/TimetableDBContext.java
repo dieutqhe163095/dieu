@@ -143,4 +143,20 @@ public class TimetableDBContext extends DBContext<Timetable> {
         }
         return timetables;
     }
+    public int getGroupId(int timetableId){
+        String sql = "Select GroupId from TimeTable where TimeTableCode = ? ";
+        try{
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, timetableId);
+             ResultSet rs = stm.executeQuery();
+             while(rs.next()){
+                 int gId = rs.getInt(1);
+                 return gId;
+             }
+        }catch(SQLException e){
+            System.out.println("getGroupId"+e.getMessage());
+        }
+        return 0;
+        
+    }
 }

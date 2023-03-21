@@ -31,8 +31,8 @@
         <servlet-class>controller.AttendanceCheckController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AttendancePercentController</servlet-name>
-        <servlet-class>controller.AttendancePercentController</servlet-class>
+        <servlet-name>Attended</servlet-name>
+        <servlet-class>controller.Attended</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>groupController</servlet-name>
@@ -55,8 +55,8 @@
         <url-pattern>/AttendanceCheck</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AttendancePercentController</servlet-name>
-        <url-pattern>/attendancePercent</url-pattern>
+        <servlet-name>Attended</servlet-name>
+        <url-pattern>/attended</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

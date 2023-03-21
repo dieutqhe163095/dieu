@@ -4,23 +4,27 @@
  */
 package controller;
 
-import dal.AttendancePercentDBContext;
+import dal.AttendanceDBContext;
+import dal.StudentDao;
+import dal.TimetableDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
-import model.Slot;
-import model.Term;
+import java.util.List;
+import model.Attendance;
+import model.Attendancee;
+import model.Student;
+import model.Timetable;
 
 /**
  *
  * @author ASUS
  */
-public class AttendancePercentController extends HttpServlet {
+public class Attended extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +43,10 @@ public class AttendancePercentController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AttendancePercentController</title>");            
+            out.println("<title>Servlet Attended</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AttendancePercentController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet Attended at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,9 +64,33 @@ public class AttendancePercentController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession session = request.getSession();
-        ArrayList<Term> termList = AttendancePercentDBContext.termList();
-        request.setAttribute("termList", termList);
+        StudentDao sd = new StudentDao();
+        AttendanceDBContext adbc = new AttendanceDBContext();
+        String gId = request.getParameter("gId");
+        int groupId = Integer.parseInt(gId);
+        List<Attendancee> attendancees = new ArrayList();
+        List<Student> students = sd.fullStudentInGroup(groupId);
+        List<Double> absentPersent = new ArrayList();
+        for (Student student : students) {
+            int count = 1;
+            List<Attendance> attendances = adbc.getAllStudentListAttendance(student.getStudentId(), groupId);
+            for (Attendance attendance1 : attendances) {
+                if(!attendance1.isAttended()){
+                    count++;
+                }
+                
+            }
+            double percent = 100*count/attendances.size();
+            absentPersent.add(percent);
+            Attendancee attd = new Attendancee(student, attendances,percent);
+            attendancees.add(attd);
+     
+        }
+        List<Attendance> attendances = adbc.getAllStudentListAttendance(students.get(0).getStudentId(), groupId);
+        request.setAttribute("data2", attendances);
+
+        request.setAttribute("data1", attendancees);
+        request.getRequestDispatcher("attendancePercent.jsp").forward(request, response);
     }
 
     /**

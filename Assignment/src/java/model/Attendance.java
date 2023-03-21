@@ -8,6 +8,25 @@ package model;
 public class Attendance {
     private Student student;
     private boolean Attended;
+    private String Date;
+
+    public Attendance() {
+    }
+
+    public Attendance(Student student, boolean Attended, String Date) {
+        this.student = student;
+        this.Attended = Attended;
+        this.Date = Date;
+    }
+
+    public String getDate() {
+        return Date;
+    }
+
+    public void setDate(String Date) {
+        this.Date = Date;
+    }
+    
 
     public Student getStudent() {
         return student;

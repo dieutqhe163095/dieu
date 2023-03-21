@@ -13,7 +13,7 @@
     </head>
 
     <body>
-         <a href="javascript:history.back()" class="back-button">Back</a>
+         <a href="attended?gId=${gId}"  class="back-button">Check attendance of all student</a>
         <div class="banner">
             <h1>Single Activity Attendance</h1>
         </div>
@@ -37,7 +37,7 @@
                         <th>TAKER</th>
                         <TH>RECORD TIME</TH>
                     </tr>
-                    
+                   
                     <c:forEach items="${requestScope.attendanceList}" var="al" varStatus="loop">
                         <tr>
                             <input type="hidden" name = "student" value="${al.student.studentId}">

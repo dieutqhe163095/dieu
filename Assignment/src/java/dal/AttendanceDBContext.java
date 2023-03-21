@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Attendance;
@@ -136,7 +137,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
         }
     }
 
-    public void updateTime(int timetableCode ) {
+    public void updateTime(int timetableCode) {
         try {
             connection.setAutoCommit(false);
             String sql = "UPDATE [dbo].[TimeTable]\n"
@@ -163,6 +164,37 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 Logger.getLogger(AttendanceDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        }
+    }
+
+    public List<Attendance> getAllStudentListAttendance(int StudentID, int GroupID) {
+        List<Attendance> list = new ArrayList<>();
+        String sql = "select Enroll.Attended, TimeTable.Date, TimeTable.GroupId from Enroll join TimeTable on Enroll.TimetableCode = TimeTable.TimetableCode\n"
+                + "where Enroll.StudentId = ? and GroupId = ?\n"
+                + "order by Date asc";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, StudentID);
+            stm.setInt(2, GroupID);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Attendance attendance = new Attendance();
+                attendance.setAttended(rs.getBoolean("Attended"));
+                attendance.setDate(rs.getString("Date"));
+                list.add(attendance);
+            }
+        } catch (SQLException e) {
+        }
+
+        return list;
+
+    }
+    
+    public static void main(String[] args) {
+        AttendanceDBContext adbc = new AttendanceDBContext();
+        List<Attendance> list = adbc.getAllStudentListAttendance(10, 1);
+        for (Attendance attendance : list) {
+            System.out.println(attendance.isAttended());
         }
     }
 }

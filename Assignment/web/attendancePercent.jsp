@@ -3,7 +3,7 @@
     Created on : Mar 20, 2023, 7:34:22 PM
     Author     : ASUS
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@
         <title>Document</title>
     </head>
     <body>
-       <a href="javascript:history.back()" class="back-button">Back</a>
+        <a href="javascript:history.back()" class="back-button">Back</a>
         <div class="banner">
             <h1>Attendance for single group in a course</h1>
         </div>
@@ -23,56 +23,50 @@
             <p>Select a course, then a group...</p>
         </Div>
         <div>
+
             <fmt:parseDate value="${requestScope.timetable.takenDate}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="parsedDateTime" type="both" />
             <form form method="post" action="Attendance">
                 <input type="hidden" name = "timetableCode" value="${requestScope.timetable.timetableCode}">
+
                 <table>
+
                     <tr>
-                        <th>CAMPUS</th>
-                        <th>TERM</th>
-                        <th>DEPARTMENT</th>
-                        <th>COURSE</th>
-<!--                       <th colspan="2">ATTENDANCE</th>-->
-                        <th>GROUP</th>
-                      
+                        <th>ROLLNUMBER</th>
+                        <th>STUDENTNAME</th>
+                        <th>ABSENT(%)SO FAR</th>
+                        <%int i = 1;%>
+                            <c:forEach items="${data2}" var="day">
+                            <th>${day.getDate()}<br>
+                            <%=i%></th>
+                            <%i++;%>
+                            </c:forEach>
+
+
                     </tr>
-                    
-                    <c:forEach items="${requestScope.attendanceList}" var="al" varStatus="loop">
-                        <tr>
-                            <input type="hidden" name = "student" value="${al.student.studentId}">
-                            <td>${loop.count}</td>
-                            <td><a href="/Assignment/Group">${requestScope.timetable.group}</a></td>
-                            <td>${al.student.studentCode}</td>
-                            <td>${al.student.fullName}</td>
-                            <td>
-                                <label for="attended">Attended</label>
-                                <input type="radio" name="${requestScope.timetable.timetableCode}_${al.student.studentId}" id="Attended" value="1" 
-                                       <c:if test="${al.attended}"> 
-                                       checked
-                                       </c:if>>
-                            </td>
-                            <td>
-                                <label for="absent">Absent</label>
-                                <input type="radio" name="${requestScope.timetable.timetableCode}_${al.student.studentId}" id="Absent" value="0"
-                                       <c:if test="${!al.attended}"> 
-                                       checked
-                                        </c:if>
-                                    >
-                            </td>
-                            <td></td>
-                            <td>${sessionScope.account.instuctorCode}</td>
-                            <td><fmt:formatDate pattern="dd/MM/yyyy HH:mm:ss" value="${parsedDateTime}" /></td>
+            
+                    <c:forEach items="${data1}" var="c" >
+                        <tr>                           
+                            <td>${c.getStudent().getStudentCode()}</td>
+                            <td>${c.getStudent().getFullName()}</td>
+                            <td>${c.getPercentAbsent()}</td>
+                            <c:forEach items="${c.getList()}" var="attendance">
+                                <c:if test="${attendance.isAttended() == true}">
+                                <td> P     </td>  
+                                </c:if>
+                                  <c:if test="${attendance.isAttended() != true}">
+                                <td> A   </td>  
+                                </c:if>   
+                                    
+                                </c:forEach>                 
+
+
                         </tr>
                     </c:forEach>
-                        
+
                 </table>
-                <input type="submit" value="Submit">
+
             </form>
-                <c:if test="${requestScope.confirm}">
-                        <div class="confirm"">
-                            <b>Summit Confirm</b>
-                        </div>
-                    </c:if>
+
         </div>
 
     </body>

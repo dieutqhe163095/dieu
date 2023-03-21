@@ -5,6 +5,7 @@
 package controller;
 
 import dal.AttendanceDBContext;
+import dal.TimetableDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -96,6 +97,7 @@ public class attendanceController extends BaseRequiredAuthenticationController {
         } catch (Exception e) {
             confirm = null;
         }      
+        TimetableDBContext tbdc = new TimetableDBContext();
         int timetableCode;
         timetableCode = Integer.parseInt(timetableCodeRaw);
         AttendanceDBContext attendanceDBContext;
@@ -105,6 +107,7 @@ public class attendanceController extends BaseRequiredAuthenticationController {
             response.sendRedirect(request.getContextPath() + "/Timetable");
         } else {
             if(confirm!= null) request.setAttribute("confirm", true);
+            request.setAttribute("gId", tbdc.getGroupId(timetableCode));
             request.setAttribute("timetable", timetable);
             ArrayList<Attendance> attendances = attendanceDBContext.list(timetableCode);
             request.setAttribute("attendanceList", attendances);
